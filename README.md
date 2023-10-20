@@ -1,7 +1,6 @@
-# Onfido SDK UI Layer
+# advance ai onestop-platform SDK UI Layer
 
-[![Build Status](https://travis-ci.org/onfido/onfido-sdk-ui.svg?branch=master)](https://travis-ci.org/onfido/onfido-sdk-ui)
-[![npm version](https://img.shields.io/npm/v/onfido-sdk-ui)](https://www.npmjs.com/package/onfido-sdk-ui)
+ 
 
 ## Table of contents
 
@@ -22,18 +21,18 @@
 
 ## Overview
 
-The Onfido Web SDK provides a set of components for JavaScript applications to capture identity documents and selfie photos, videos, and motion captures for the purpose of identity verification.
+The advance ai onestop-platform Web SDK provides a set of components for JavaScript applications to capture identity documents and selfie photos, custom form for the purpose of identity verification.
 
 The SDK offers a number of benefits to help you create the best identity verification experience for your customers:
 
-- Carefully designed UI to guide your customers through the entire capture process for photos, videos, or motion captures
-- Modular design to help you seamlessly integrate the capture process for photos, videos, or motion captures into your application flow
-- Advanced image quality detection technology to ensure the quality of the captured images meets the requirement of the Onfido identity verification process, guaranteeing the best success rate
-- Direct image upload to the Onfido service, to simplify integration
+- Carefully designed UI to guide your customers through the entire capture process for photos, videos, or custom form
+- Modular design to help you seamlessly integrate the capture process for photos, videos, or custom form into your application flow
+- Advanced Face and live  detection technology to ensure the quality of the captured images meets the requirement of the onestop identity verification process, guaranteeing the best success rate
+- Direct image upload to the onestop service, to simplify integration
 
-⚠️ Note: the SDK is only responsible for capturing photos, videos, and motion captures. You still need to access the [Onfido API](https://documentation.onfido.com/) to manage applicants and perform checks.
+⚠️ Note: the SDK is only responsible for capturing document photos, selfie, and custom form. You still need to access the [onestop platform](https://sg-oop.advance.ai/) to manage applicants and perform checks.
 
-![Various views from the SDK](demo/screenshots.jpg)
+![Various views from the SDK]()
 
 ## General tips
 
@@ -41,40 +40,26 @@ For use in a mobile device, it is recommended to set up the SDK to use the full 
 
 ## Getting started
 
-The following content assumes you're using our API v3 versions for backend calls. If you are currently using API `v2` please refer to [this migration guide](https://developers.onfido.com/guide/api-v2-to-v3-migration-guide) for more information.
+[//]: # (The following content assumes you're using our API v3 versions for backend calls. If you are currently using API `v2` please refer to [this migration guide](https://developers.onfido.com/guide/api-v2-to-v3-migration-guide) for more information.)
 
 <Callout type="info">
 
-> ℹ️ If you are integrating using Onfido Studio please see out [Studio integration guide](ONFIDO_STUDIO.md).
+> ℹ️ If you are integrating using workflow please see out [onestop integration guide](workflow.md).
 
 </Callout>
 
-### 1. Obtain an API token
+### 1. Obtain an Access Key
 
-In order to start integrating, you'll need an [API token](https://documentation.onfido.com/#api-tokens).
+In order to start integrating, you'll need an [access key](https://document-dev-oop.advai.cn/ApiReference/index).
 
-You can use our [sandbox](https://documentation.onfido.com/#sandbox-testing) environment to test your integration. To use the sandbox, you'll need to generate a sandbox API token in your [Onfido Dashboard](https://onfido.com/dashboard/api/tokens).
+You can use our [sandbox](https://sandbox-oop.advai.net/) environment to test your integration. To use the sandbox, you'll need to generate a sandbox API token in your [onestop Dashboard]().
 
-⚠️ **Note: You must never use API tokens in the frontend of your application or malicious users could discover them in your source code. You should only use them on your server.**
+⚠️ **Note: You must never use Access Key  in the frontend of your application or malicious users could discover them in your source code. You should only use them on your server.**
 
 #### 1.1 Regions
 
-Onfido offers region-specific environments. Refer to the [Regions](https://documentation.onfido.com/#regions) section in the API documentation for token format and API base URL information.
+Onfido offers region-specific environments. Refer to the [Regions](https://one-stop-documentation.readme.io/reference/retrieve-aml-profiles-of-inquiry-sandbox-copy) section in the API documentation for token format and API base URL information.
 
-### 2. Create an applicant
-
-To create an applicant from your backend server, make request to the ['create applicant' endpoint](https://documentation.onfido.com/#create-applicant), using a valid API token.
-
-⚠️ Note: Different report types have different minimum requirements for applicant data. For a Document or Facial Similarity report, the minimum applicant details required are `first_name` and `last_name`.
-
-```shell
-$ curl https://api.onfido.com/v3/applicants \
-  -H 'Authorization: Token token=<YOUR_API_TOKEN>' \
-  -d 'first_name=John' \
-  -d 'last_name=Smith'
-```
-
-The JSON response will contain an `id` field containing an UUID that identifies the applicant. Once you pass the applicant ID to the SDK, documents, photos, videos, and motion captures uploaded by that instance of the SDK will be associated with that applicant.
 
 ### 3. Generate an SDK token
 
@@ -85,15 +70,13 @@ The SDK is authenticated using SDK tokens. Each authenticated instance of the SD
 To generate an SDK token, make a request to the ['generate SDK token' endpoint](https://documentation.onfido.com/#generate-web-sdk-token), including the applicant ID and a valid referrer.
 
 ```shell
-$ curl https://api.onfido.com/v3/sdk_token \
-  -H 'Authorization: Token token=<YOUR_API_TOKEN>' \
-  -F 'applicant_id=<APPLICANT_ID>' \
+$   curl https://api.advance.ai/openapi/onestop/get-sdk-token \
+  -H 'Authorization: Access Key token=<YOUR_ACCESS_KEY>' \
   -F 'referrer=<REFERRER_PATTERN>'
 ```
 
 | Parameter      | Notes                                                            |
 | -------------- | ---------------------------------------------------------------- |
-| `applicant_id` | **required** <br /> Specifies the applicant for the SDK instance |
 | `referrer`     | **optional** <br /> The referrer URL pattern                     |
 
 ⚠️ Note: SDK tokens expire after 90 minutes.
